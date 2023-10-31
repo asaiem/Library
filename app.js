@@ -8,6 +8,27 @@ function Book(title,author,pages,read){
 
 }
 
+// Book.prototype.changeRead = function(i){
+//     myLibrary[i].read = !myLibrary[i].read
+
+//     // this.read    = !this.read
+//     showLibrary()
+// }
+function changeRead(i){
+    myLibrary[i].read = !myLibrary[i].read
+    showLibrary()
+
+}
+//function to remove book
+function removeFun(i){
+    myLibrary.splice(i,1)
+
+    //TO Reload the List of book Again,so the removed'll disappear
+    showLibrary()
+}
+
+
+
 function showLibrary(){
     let pageLibrary = document.querySelector('#library')
     pageLibrary.innerHTML = ''
@@ -17,7 +38,7 @@ function showLibrary(){
         let bookBlock = document.createElement('div')
         // bookBlock.innerHTML = `${oneBook.title}` 
         bookBlock.setAttribute('class','card')
-        bookBlock.innerHTML = `<div class="card">
+        bookBlock.innerHTML = `<div class="card" style="width: 18rem;">
         <div class="card-body">
         <h5 class="card-header">${oneBook.title}</h5>
         <h5 class="card-title">${oneBook.author}</h5>
@@ -26,6 +47,8 @@ function showLibrary(){
         
        <p  class="card-text">No. Pages :${oneBook.pages}</p>
        <p  class="card-text">${oneBook.read ? "Read" : "Not Read"}</p>
+       <button class="btn btn-danger" onclick="removeFun(${i})">Remove </button>
+       <button class="btn btn-warning" onclick="changeRead(${i})">Change </button>
         
         </div>
         </div>
@@ -48,6 +71,14 @@ function addBookToLibrary() {
      myLibrary.push(newBook)
      console.log(myLibrary)
     showLibrary()
+
+    //Reset Form After Adding Submitting it
+    document.querySelector('#title').value = ''
+     document.querySelector('#author').value = ''
+     document.querySelector('#pages').value = ''
+     //CHECKED to 
+     document.querySelector('#read').checked  = false
+
   }
 
 
